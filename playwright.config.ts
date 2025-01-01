@@ -49,8 +49,9 @@ export default defineConfig({
       name: 'chromium',
       use: { 
         ...devices['Desktop Chrome'], channel: 'chrome',
-     // viewport: null,
+      viewport: null,
       headless: false,
+      deviceScaleFactor: undefined,
       launchOptions: {
         args: ["--start-maximized"]
       //  headless: false,
