@@ -1,0 +1,20 @@
+{
+  "name": "playwright_automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2"
+  },
+  "dependencies": {
+    "csv-parse": "^5.6.0",
+    "dot-env": "^0.0.1",
+    "dotenv": "^16.4.7",
+    "fs": "^0.0.1-security"
+  }
+}
