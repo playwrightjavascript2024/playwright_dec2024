@@ -1,0 +1,822 @@
+{
+	"info": {
+		"_postman_id": "594a58a8-ad4a-408c-8092-b5ec350fb5a4",
+		"name": "API_DEC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ServiceNow",
+			"item": [
+				{
+					"name": "GETSpecificIncident",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UY2mOUe^7p@f",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev216320.service-now.com/api/now/table/incident/{{Incident_id}}",
+							"protocol": "https",
+							"host": [
+								"dev216320",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"table",
+								"incident",
+								"{{Incident_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New ServicenwResource",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json()\r",
+									"\r",
+									"var sys_ID=res.result.sys_id\r",
+									"pm.globals.set(\"Incident_id\", sys_ID);\r",
+									"\r",
+									"pm.collectionVariables.set(\"inc_id\", sys_ID);\r",
+									"pm.environment.set(\"incid_PROD\", sys_ID);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "UY2mOUe^7p@f",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"Learning To create resource\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev216320.service-now.com/api/now/table/incident",
+							"protocol": "https",
+							"host": [
+								"dev216320",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"table",
+								"incident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update resource",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UY2mOUe^7p@f",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"short_description\":\"Learning with Patch method\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev216320.service-now.com/api/now/table/incident/{{Incident_id}}",
+							"protocol": "https",
+							"host": [
+								"dev216320",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"table",
+								"incident",
+								"{{Incident_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the record",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "UY2mOUe^7p@f",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://dev216320.service-now.com/api/now/table/incident/{{Incident_id}}",
+							"protocol": "https",
+							"host": [
+								"dev216320",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"api",
+								"now",
+								"table",
+								"incident",
+								"{{Incident_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Salesforce",
+			"item": [
+				{
+					"name": "Generate Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp=pm.response.json()\r",
+									"\r",
+									"var SF_accestkn=resp.access_token\r",
+									"\r",
+									"var SF_instURL=resp.instance_url\r",
+									"\r",
+									"pm.globals.set(\"SF_acTK\",SF_accestkn)\r",
+									"pm.globals.set(\"SF_URL\",SF_instURL)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "3MVG95mg0lk4bathv4oYb772GRC3bVxW1Es_Q3iIRRNR8SK5ApA.LJbPT96HpWJInRGniHTbF.cUq2.uJatoV",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "149569A62384820C94E7FCB265BEFEC659DE02AD4E4D4BAEE95A354329BCD654",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "vidyar@testleaf.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Sales@123",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://login.salesforce.com/services/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"login",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"services",
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gat all Leads",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SF_acTK}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SF_acTK}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects/Lead",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects",
+								"Lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Lead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp=pm.response.json()\r",
+									"\r",
+									"var Lead_ID=resp.id\r",
+									"pm.globals.set(\"ID\",Lead_ID)\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SF_acTK}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\":\"Vidya\",\r\n    \"lastname\":\"R\",\r\n    \"company\":\"TL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects/Lead",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects",
+								"Lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp=pm.response.json()\r",
+									"\r",
+									"var Lead_ID=resp.id\r",
+									"pm.globals.set(\"ID\",Lead_ID)\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SF_acTK}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\":\"Vidya\",\r\n    \"lastname\":\"R\",\r\n    \"company\":\"TL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects/Lead",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects",
+								"Lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET specfifLead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SF_acTK}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects/Lead/{{ID}}",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects",
+								"Lead",
+								"{{ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SF API  Endpoints",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body\r",
+									"const response = pm.response.json();\r",
+									"//console.log(response)\r",
+									"// Initialize an array to store the URLs\r",
+									" const sobjectUrls = response.sobjects.map(obj => obj.urls.sobject);\r",
+									"\r",
+									"// sobjects[57].urls.sobject\r",
+									"\r",
+									"// // // Log the URLs to the console\r",
+									"console.log(sobjectUrls);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SF_acTK}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Salesforce_Account",
+			"item": [
+				{
+					"name": "CreateAccount",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp=pm.response.json()\r",
+									"\r",
+									"var SF_accountID=resp.id\r",
+									"\r",
+									"pm.globals.set(\"SF_acctID\",SF_accountID)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SF_acTK}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SF_acTK}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"Name\" : \"Express Logistics and Transport\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects/Account",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects",
+								"Account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRecord",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SF_acTK}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SF_acTK}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"BillingCity\" : \"San Francisco\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects/Account/001J200000Cu7g8IAB",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects",
+								"Account",
+								"001J200000Cu7g8IAB"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFieldValues",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SF_acTK}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{SF_acTK}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects/Account/{{SF_acctID}}?fields=AccountNumber,BillingPostalCode",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects",
+								"Account",
+								"{{SF_acctID}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "AccountNumber,BillingPostalCode"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRecord",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SF_acTK}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SF_acTK}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{SF_URL}}/services/data/v62.0/sobjects/Account/{{SF_acctID}}",
+							"host": [
+								"{{SF_URL}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v62.0",
+								"sobjects",
+								"Account",
+								"{{SF_acctID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "variable_key",
+			"value": ""
+		},
+		{
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "inc_id",
+			"value": ""
+		}
+	]
+}
