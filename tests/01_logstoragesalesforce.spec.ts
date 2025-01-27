@@ -1,16 +1,22 @@
 import test, {chromium, expect} from '@playwright/test'
-
+import dotenv from 'dotenv'
+const fileTORead=process.env.envFile
+dotenv.config({path:`constants/${fileTORead}.env`})
 test(`storageState`,async()=>{
+    console.log(process.env.LT_Username)
+
+    const user=  process.env.LT_Username as string
+    const pwd=process.env.LT_Password as string
     const browser = await chromium.launch();
     const browserContext = await browser.newContext(); 
     const page = await browserContext.newPage();
     await page.goto("https://login.salesforce.com/")
 
     // Enter username using getByLabel 
-    await page.locator("//input[@id='username']").fill("karthikeyan@ami.com")
+    await page.locator("//input[@id='username']").fill(user)
 
     // Enter password using getByLabel 
-    await page.locator("//input[@id='password']").fill("Sales@123")
+    await page.locator("//input[@id='password']").fill(pwd)
 
     // Click Login 
     await page.locator("//input[@id='Login']").click()

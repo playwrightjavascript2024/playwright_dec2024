@@ -4,6 +4,8 @@ import test, {chromium} from '@playwright/test'
 test.use({storageState:"constants/Salesforce_Login.json"})
 test(`Use storageState`,async()=>{
 
+    //console.log(process.env.LT_Username)
+
     const browser = await chromium.launch();
     const browserContext = await browser.newContext(); 
     const page = await browserContext.newPage();
